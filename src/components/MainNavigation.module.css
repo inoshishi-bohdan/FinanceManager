@@ -2,6 +2,7 @@
    background-color: white;
    min-height: var(--nav-height);
    padding: 0.5rem !important;
+   z-index: 10;
 }
 
 .custom-container-fluid {
@@ -31,8 +32,7 @@
    background-color: #0b5ed7;
 }
 
-.register-button {
-   margin-left: 8px;
+.logout-button, .register-button {
    background-color: #666777;
    color: white;
    font-size: 1rem;
@@ -42,7 +42,16 @@
    transition: 0.3s background-color;
 }
 
-.register-button:hover {
+.logout-button {
+   border: none;
+}
+
+.register-button {
+   margin-left: 8px;
+}
+
+
+.register-button:hover, .logout-button:hover {
    background-color: #808297;
 }
 
