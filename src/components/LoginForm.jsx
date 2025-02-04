@@ -1,11 +1,10 @@
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ErrorBox from "./ErrorBox";
 import Input from "./Input";
 import { useState, useContext } from "react";
 import { AuthContext } from "../App";
 
 export default function LoginForm() {
-   const navigation = useNavigation();
    const [isSubmitting, setIsSubmitting] = useState(false); 
    const navigate = useNavigate();
    const [responseMessage, setResponseMessage] = useState(null);
@@ -13,7 +12,7 @@ export default function LoginForm() {
 
    async function handleSubmit(event) {
       event.preventDefault();
-      setIsSubmitting(true); // Set to true *before* the fetch call
+      setIsSubmitting(true); 
  
       const fd = new FormData(event.target);
       const data = Object.fromEntries(fd.entries());
