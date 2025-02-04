@@ -1,8 +1,16 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
 import logo from '../assets/logo.png';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../App';
 
 function MainNavigation() {
+   const [isAuthenticated, changeIsAuthenticated] = useContext(AuthContext);
+
+   function handleLogout() {
+      changeIsAuthenticated(false);
+   }
+
    return (
       <nav className={`navbar navbar-expand-lg fixed-top ${classes['custom-navbar']}`}>
          <div className={`container-fluid justify-content-center justify-content-sm-between ${classes['custom-container-fluid']}`}>
@@ -36,13 +44,12 @@ function MainNavigation() {
                </div>
             </div>
             <div className='d-flex align-items-center justify-content-center'>
-               <NavLink className={classes['login-button']} to='/login'>Login</NavLink>
-               <NavLink className={classes['register-button']} to='/register'>Sign Up</NavLink>
-               {/* remove toggler if user not authenticated */}
-               {/* add logout button */}
-               <button className={`navbar-toggler ${classes['custom-toggler']} pe-0`} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+               {!isAuthenticated && <NavLink className={classes['login-button']} to='/login'>Login</NavLink>}
+               {!isAuthenticated && <NavLink className={classes['register-button']} to='/register'>Sign Up</NavLink>}
+               {isAuthenticated && <button onClick={handleLogout} type='button' className={classes['logout-button']}>Logout</button>}
+               {isAuthenticated && <button className={`navbar-toggler ${classes['custom-toggler']} pe-0`} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
-               </button>
+               </button>}
             </div>
          </div>
       </nav >);
