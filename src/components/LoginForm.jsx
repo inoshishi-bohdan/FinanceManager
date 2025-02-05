@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 import ErrorBox from "./ErrorBox";
 import Input from "./Input";
 import { useState, useContext } from "react";
-import { AuthContext } from "../App";
+import { AuthContext } from "../store/authentication-context";
 
 export default function LoginForm() {
    const [isSubmitting, setIsSubmitting] = useState(false); 
-   const navigate = useNavigate();
    const [responseMessage, setResponseMessage] = useState(null);
-   const [isAuthenticated, changeIsAuthenticated] = useContext(AuthContext);
+   const {changeIsAuthenticated} = useContext(AuthContext);
+   const navigate = useNavigate();
 
    async function handleSubmit(event) {
       event.preventDefault();

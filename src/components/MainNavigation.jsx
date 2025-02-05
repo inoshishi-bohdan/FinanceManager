@@ -1,11 +1,11 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
 import logo from '../assets/logo.png';
-import { useContext, useEffect } from 'react';
-import { AuthContext } from '../App';
+import { useContext } from 'react';
+import { AuthContext } from '../store/authentication-context';
 
 function MainNavigation() {
-   const [isAuthenticated, changeIsAuthenticated] = useContext(AuthContext);
+   const {isAuthenticated, changeIsAuthenticated} = useContext(AuthContext)
 
    function handleLogout() {
       changeIsAuthenticated(false);
