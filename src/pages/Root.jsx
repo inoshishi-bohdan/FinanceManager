@@ -2,72 +2,124 @@ import MainNavigation from '../components/MainNavigation.jsx'
 import { Outlet } from 'react-router-dom'
 import { BASE_URL } from '../util/http';
 import { jwtDecode } from "jwt-decode";
-import { useEffect } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { showErrorNotification, showInfoNotification } from '../util/notification.js';
+import { AuthContext } from '../store/authentication-context.jsx';
+import { ToastContainer, Bounce } from 'react-toastify';
 
 export default function RootLayout() {
    const navigate = useNavigate();
+   const { changeIsAuthenticated } = useContext(AuthContext);
+   const isRefreshing = useRef(false);
 
    useEffect(() => {
       const interval = 1000 * 60 * 14;
       let intervalId;
 
       async function refreshTokens() {
+         if (isRefreshing.current) return;
+         isRefreshing.current = true;
+
          const refreshToken = localStorage.getItem('refreshToken');
          const accessToken = localStorage.getItem('accessToken');
 
-         if (refreshToken && accessToken) {
+         if (!refreshToken || !accessToken) {
+            isRefreshing.current = false;
+            return;
+         }
+
+         let userId;
+         try {
+            const decoded = jwtDecode(accessToken);
+            userId = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+         } catch (error) {
+            showErrorNotification(`JWT Decode Error: ${error.message}`);
+            changeIsAuthenticated(false);
+            navigate('/login');
+            isRefreshing.current = false;
+            return;
+         }
+
+         const request = { userId, refreshToken };
+         const url = `${BASE_URL}/api/Auth/refreshToken`;
+
+         let response;
+         try {
+            response = await fetch(url, {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify(request),
+            });
+         } catch (error) {
+            console.error("Fetch Error:", error);
+            navigate('/error', { state: { message: "A network error occurred", status: 500 } });
+            isRefreshing.current = false;
+            return;
+         }
+
+         if (!response) {
+            isRefreshing.current = false;
+            return;
+         }
+
+         if (response.status === 401) {
             try {
-               const decoded = jwtDecode(accessToken);
-               const userId = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-               const request = { userId, refreshToken };
-               const url = BASE_URL + '/api/Auth/refreshToken';
-
-               const response = await fetch(url, {
-                  method: 'POST',
-                  headers: {
-                     'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(request),
-               });
-
-               if (response.status === 401) {
-                  const errorData = await response.json();
-                  throw new Error(`Refresh token request failed: ${response.status} - ${errorData?.message || 'Unauthorized'}`);
-               }
-
-               try {
-                  const resData = await response.json();
-                  localStorage.setItem('accessToken', resData.accessToken);
-                  localStorage.setItem('refreshToken', resData.refreshToken);
-               } catch (jsonError) {
-                  console.error("Error parsing JSON response:", jsonError);
-                  throw new Error("Invalid JSON response from refresh token endpoint.");
-               }
-
-            } catch (error) {
-               //show message
-               console.error("Token refresh failed:", error);
-               localStorage.removeItem('accessToken');
-               localStorage.removeItem('refreshToken');
-               navigate('/login');
+               const resData = await response.json();
+               showInfoNotification(resData.message);
+            } catch {
+               showErrorNotification('Invalid refresh token JSON response');
             }
+            changeIsAuthenticated(false);
+            navigate('/login');
+            isRefreshing.current = false;
+            return;
+         }
+
+         if (!response.ok) {
+            changeIsAuthenticated(false);
+            navigate('/error', { state: { message: "Could not refresh token", status: 500 } });
+            isRefreshing.current = false;
+            return;
+         }
+
+         try {
+            const resData = await response.json();
+            localStorage.setItem('accessToken', resData.accessToken);
+            localStorage.setItem('refreshToken', resData.refreshToken);
+         } catch {
+            showErrorNotification('Invalid refresh token JSON response');
+            changeIsAuthenticated(false);
+            navigate('/login');
+         } finally {
+            isRefreshing.current = false;
          }
       }
+
       refreshTokens();
       intervalId = setInterval(refreshTokens, interval);
 
-      return () => {
-         clearInterval(intervalId);
-      };
-   }, []);
-
+      return () => clearInterval(intervalId);
+   }, [navigate, changeIsAuthenticated, showInfoNotification, showErrorNotification]);
 
    // const navigation = useNavigation();
 
    return (
       <>
          <MainNavigation />
+         <ToastContainer
+            position="bottom-center"
+            autoClose={2500}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={false}
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Bounce}
+         />
          <main>
             {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
             <Outlet />
