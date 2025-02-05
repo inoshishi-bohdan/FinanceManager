@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorBox from "./ErrorBox";
 import Input from "./Input";
 import { useState } from "react";
+import {showSuccessNotification } from '../util/notification'
 
 export default function RegisterForm() {
    const navigate = useNavigate();
@@ -47,6 +48,7 @@ export default function RegisterForm() {
          navigate('/error', { state: { message: "Could not register user", status: 500 } });
          return;
       }
+      showSuccessNotification('You were successfully registered');
       navigate('/login');
    }
 
