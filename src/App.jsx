@@ -7,11 +7,8 @@ import HomePage from './pages/Home';
 import IncomePage from './pages/Incomes';
 import ExpensesPage from './pages/Expenses';
 import StatisticsPage from './pages/Statistics';
-import { createContext, useState } from 'react';
 import NavigateErrorPage from './pages/NavigateError';
-
-
-export const AuthContext = createContext();
+import AuthenticationContextProvider from './store/authentication-context';
 
 const router = createBrowserRouter([
    {
@@ -31,19 +28,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.accessToken ? true : false);
-
-   function changeIsAuthenticated(value) {
-      setIsAuthenticated(value);
-
-      if (value === false) {
-         localStorage.clear();
-      }
-   }
-
-   return <AuthContext.Provider value={[isAuthenticated, changeIsAuthenticated]}>
-      <RouterProvider router={router} />;
-   </AuthContext.Provider>
+   return (
+      <AuthenticationContextProvider>
+         <RouterProvider router={router} />;
+      </AuthenticationContextProvider>
+   );
 }
 
 export default App
