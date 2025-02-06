@@ -1,34 +1,26 @@
-import { redirect } from "react-router-dom";
 
-export function getAuthToken() {
-   const token = localStorage.getItem('token');
-   return token;
+import { jwtDecode } from "jwt-decode";
+
+export function getAccessToken() {
+   const accessToken = localStorage.getItem('accessToken');
+   return accessToken;
 }
 
-export function tokenLoader() {
-   return getAuthToken();
+export function setAccessToken(accessToken) {
+   localStorage.setItem('accessToken', accessToken);
 }
 
-export function getTokenDuration() {
-   const storedExpirationDate = localStorage.getItem('expiration');
-   const expirationDate = new Date(storedExpirationDate);
-   const now = new Date();
-   const duration = expirationDate.getTime() - now.getTime();
-   return duration
+export function getRefreshToken() {
+   const refreshToken = localStorage.getItem('refreshToken');
+   return refreshToken;
 }
 
-export function checkAuthLoader() {
-   const token = getAuthToken();
+export function setRefreshToken(refreshToken) {
+   localStorage.setItem('refreshToken', refreshToken);
+}
 
-   if (!token) {
-      return;
-   }
-
-   const tokenDuration = getTokenDuration();
-
-   if (tokenDuration < 0) {
-      return 'EXPIRED';
-   }
-
-   return token;
+export function getUserIdFromAccessToken(accessToken) {
+   const decoded = jwtDecode(accessToken);
+   const userId = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+   return userId;
 }
