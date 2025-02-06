@@ -1,5 +1,5 @@
 import PageContent from "../components/PageContent";
 
-export default function ExpensesPage() {
+export default function ExpensePage() {
    return <PageContent title='Expenses'/>
 }

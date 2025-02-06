@@ -5,8 +5,8 @@ import RegisterPage from './pages/Register';
 import RouterErrorPage from './pages/RouterError';
 import HomePage from './pages/Home';
 import IncomePage from './pages/Incomes';
-import ExpensesPage from './pages/Expenses';
-import StatisticsPage from './pages/Statistics';
+import ExpensePage from './pages/Expenses';
+import StatisticPage from './pages/Statistics';
 import NavigateErrorPage from './pages/NavigateError';
 import AuthenticationContextProvider from './store/authentication-context';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -26,12 +26,12 @@ const router = createBrowserRouter([
          { 
            path: 'expenses', 
            element: <ProtectedRoute />,  
-           children: [{ index: true, element: <ExpensesPage /> }] 
+           children: [{ index: true, element: <ExpensePage /> }] 
          },
          { 
            path: 'statistics', 
            element: <ProtectedRoute />, 
-           children: [{ index: true, element: <StatisticsPage /> }] 
+           children: [{ index: true, element: <StatisticPage /> }] 
          },
          { path: 'login', element: <LoginPage /> },
          { path: 'register', element: <RegisterPage /> },

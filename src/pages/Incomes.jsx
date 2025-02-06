@@ -1,5 +1,9 @@
 import PageContent from "../components/PageContent"
 
-export default function IncomesPage() {
+export default function IncomePage() {
    return <PageContent title='Incomes' />
+}
+
+export async function loader() {
+
 }
