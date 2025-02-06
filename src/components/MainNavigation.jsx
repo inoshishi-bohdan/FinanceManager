@@ -31,15 +31,15 @@ function MainNavigation() {
                      <li className="nav-item" data-bs-dismiss="offcanvas">
                         <NavLink className={({ isActive }) => `nav-link mx-lg-2 ${classes['custom-nav-link']} ${isActive ? classes['active'] : ''}`} to='/' end>Home</NavLink>
                      </li>
-                     <li className="nav-item" data-bs-dismiss="offcanvas">
+                     {isAuthenticated && <li className="nav-item" data-bs-dismiss="offcanvas">
                         <NavLink className={({ isActive }) => `nav-link mx-lg-2 ${classes['custom-nav-link']} ${isActive ? classes['active'] : ''}`} to='/incomes'>Incomes</NavLink>
-                     </li>
-                     <li className="nav-item" data-bs-dismiss="offcanvas">
+                     </li>}
+                     {isAuthenticated && <li className="nav-item" data-bs-dismiss="offcanvas">
                         <NavLink className={({ isActive }) => `nav-link mx-lg-2 ${classes['custom-nav-link']} ${isActive ? classes['active'] : ''}`} to='/expenses'>Expenses</NavLink>
-                     </li>
-                     <li className="nav-item" data-bs-dismiss="offcanvas">
+                     </li>}
+                     {isAuthenticated && <li className="nav-item" data-bs-dismiss="offcanvas">
                         <NavLink className={({ isActive }) => `nav-link mx-lg-2 ${classes['custom-nav-link']} ${isActive ? classes['active'] : ''}`} to='/statistics'>Statistics</NavLink>
-                     </li>
+                     </li>}
                   </ul>
                </div>
             </div>

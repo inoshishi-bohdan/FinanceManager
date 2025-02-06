@@ -9,6 +9,7 @@ import ExpensesPage from './pages/Expenses';
 import StatisticsPage from './pages/Statistics';
 import NavigateErrorPage from './pages/NavigateError';
 import AuthenticationContextProvider from './store/authentication-context';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
    {
@@ -17,13 +18,25 @@ const router = createBrowserRouter([
       errorElement: <RouterErrorPage />,
       children: [
          { index: true, element: <HomePage /> },
-         { path: 'incomes', element: <IncomePage /> },
-         { path: 'expenses', element: <ExpensesPage /> },
-         { path: 'statistics', element: <StatisticsPage /> },
+         { 
+           path: 'incomes', 
+           element: <ProtectedRoute />,  
+           children: [{ index: true, element: <IncomePage /> }] 
+         },
+         { 
+           path: 'expenses', 
+           element: <ProtectedRoute />,  
+           children: [{ index: true, element: <ExpensesPage /> }] 
+         },
+         { 
+           path: 'statistics', 
+           element: <ProtectedRoute />, 
+           children: [{ index: true, element: <StatisticsPage /> }] 
+         },
          { path: 'login', element: <LoginPage /> },
          { path: 'register', element: <RegisterPage /> },
-         { path: 'error', element: <NavigateErrorPage /> }
-      ]
+         { path: 'error', element: <NavigateErrorPage /> },
+       ],
    }
 ]);
 
