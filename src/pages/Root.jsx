@@ -1,12 +1,12 @@
 import MainNavigation from '../components/MainNavigation.jsx'
 import { Outlet } from 'react-router-dom'
 import { BASE_URL } from '../util/http';
-import { jwtDecode } from "jwt-decode";
 import { useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { showErrorNotification, showInfoNotification } from '../util/notification.js';
 import { AuthContext } from '../store/authentication-context.jsx';
 import { ToastContainer, Bounce } from 'react-toastify';
+import { getAccessToken, getRefreshToken, getUserIdFromAccessToken, setAccessToken, setRefreshToken } from '../util/auth.js';
 
 export default function RootLayout() {
    const navigate = useNavigate();
@@ -21,8 +21,8 @@ export default function RootLayout() {
          if (isRefreshing.current) return;
          isRefreshing.current = true;
 
-         const refreshToken = localStorage.getItem('refreshToken');
-         const accessToken = localStorage.getItem('accessToken');
+         const refreshToken = getRefreshToken();
+         const accessToken = getAccessToken();
 
          if (!refreshToken || !accessToken) {
             isRefreshing.current = false;
@@ -31,8 +31,7 @@ export default function RootLayout() {
 
          let userId;
          try {
-            const decoded = jwtDecode(accessToken);
-            userId = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+            userId = getUserIdFromAccessToken(accessToken);
          } catch (error) {
             showErrorNotification(`JWT Decode Error: ${error.message}`);
             changeIsAuthenticated(false);
@@ -85,8 +84,8 @@ export default function RootLayout() {
 
          try {
             const resData = await response.json();
-            localStorage.setItem('accessToken', resData.accessToken);
-            localStorage.setItem('refreshToken', resData.refreshToken);
+            setAccessToken(resData.accessToken);
+            setRefreshToken(resData.refreshToken);
          } catch {
             showErrorNotification('Invalid refresh token JSON response');
             changeIsAuthenticated(false);
@@ -100,7 +99,7 @@ export default function RootLayout() {
       intervalId = setInterval(refreshTokens, interval);
 
       return () => clearInterval(intervalId);
-   }, [navigate, changeIsAuthenticated, showInfoNotification, showErrorNotification]);
+   }, [navigate, changeIsAuthenticated]);
 
    // const navigation = useNavigation();
 
