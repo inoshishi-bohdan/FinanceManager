@@ -27,7 +27,7 @@ function MainNavigation() {
                   <button type="button" className={`btn-close ${classes['custom-btn-close']}`} data-bs-dismiss="offcanvas" aria-label="Close"></button>
                </div>
                <div className="offcanvas-body">
-                  <ul className="navbar-nav justify-content-center flex-grow-1 pe-3">
+                  <ul className="navbar-nav justify-content-center flex-grow-1">
                      <li className="nav-item" data-bs-dismiss="offcanvas">
                         <NavLink className={({ isActive }) => `nav-link mx-lg-2 ${classes['custom-nav-link']} ${isActive ? classes['active'] : ''}`} to='/' end>Home</NavLink>
                      </li>

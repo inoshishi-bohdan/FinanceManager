@@ -10,7 +10,6 @@ import StatisticPage from './pages/Statistics';
 import NavigateErrorPage from './pages/NavigateError';
 import AuthenticationContextProvider from './store/authentication-context';
 import ProtectedRoute from './components/ProtectedRoute';
-
 const router = createBrowserRouter([
    {
       path: '/',
