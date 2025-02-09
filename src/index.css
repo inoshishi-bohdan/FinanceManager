@@ -26,6 +26,7 @@ main {
    display: flex;
    justify-content: center;
    align-items: center;
+   flex-direction: column;
 }
 
 .page-content {
@@ -74,19 +75,95 @@ h4.auth {
    font-weight: 500 !important;
 }
 
+.table-container {
+   max-width: 1600px;
+   width: 100%;
+   margin-top: 90px;
+   margin-bottom: 20px;
+}
+
+.table-name {
+   margin-bottom: 50px;
+   color: white;
+   font-size: 2.25rem;
+   text-align: center;
+}
+
+.table td {
+   vertical-align: middle; 
+}
+
+.filter-input, .filter-select {
+   width: 150px; /* Initial/Preferred width */
+   max-width: 150px; /* Maximum width */
+   min-width: 100px; /* Minimum width */
+   border-width: 1.5px;
+   margin-right: 3px;
+   margin-top: 3px;
+}
+
+.action-button {
+   width: 70px;
+}
+
+.pagination-container {
+   margin-top: 15px;
+   width: 100%;
+   min-height: 40px;
+   display: flex;
+   justify-content: space-around;
+   gap: 20px;
+   align-items: center;
+   flex-wrap: wrap;
+}
+
+.pagination-navigation {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 8px;
+}
+
+.page-selector {
+   max-width: 100px !important;
+}
+
+.page-volume-select {
+   max-width: 250px !important;
+}
+
+@media (max-width: 850px) {
+   .table th, td {
+      padding: 3px !important;
+   }
+}
+
+
 @media (max-width: 500px) {
    form.auth {
       width: 100%;
       min-width: 0;
-   }
-
-   form.auth {
       padding: 30px;
    }
 }
 
-@media (max-height: 900px) {
+@media (max-width: 435px) {
    main {
       padding-top: calc(var(--nav-height) + 50px);
    }
+   
+   .table {
+      font-size: 0.8rem !important;
+   }
+
+   .table th, td {
+      text-align: center;
+   }
+
+   .action-button {
+      width: 50px;
+      padding: 3px !important;
+      font-size: 0.7rem !important;
+   }
 }
+
