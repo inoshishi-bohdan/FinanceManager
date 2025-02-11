@@ -41,7 +41,7 @@ export default function TablePagination({ tableConfiguration }) {
             </div>
          </div>
          <div className='d-flex align-items-center justify-content-center gap-3'>
-            <p style={{width: '200px'}} className='text-white m-0'>Go to page:</p>
+            <p style={{ width: '200px' }} className='text-white m-0'>Go to page:</p>
             <input
                type="number"
                defaultValue={tableConfiguration.getState().pagination.pageIndex + 1}

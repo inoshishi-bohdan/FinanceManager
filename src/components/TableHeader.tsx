@@ -17,7 +17,7 @@ export default function TableHeader({ tableConfiguration }) {
                      <th key={header.id} colSpan={header.colSpan} className='align-top'>
                         {header.isPlaceholder ? null : (
                            <>
-                              <div 
+                              <div
                                  {...{
                                     className: header.column.getCanSort()
                                        ? 'cursor-pointer select-none'
