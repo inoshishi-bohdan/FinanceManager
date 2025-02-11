@@ -10,6 +10,7 @@ import StatisticPage from './pages/Statistics';
 import NavigateErrorPage from './pages/NavigateError';
 import AuthenticationContextProvider from './store/authentication-context';
 import ProtectedRoute from './components/ProtectedRoute';
+
 const router = createBrowserRouter([
    {
       path: '/',
@@ -17,25 +18,25 @@ const router = createBrowserRouter([
       errorElement: <RouterErrorPage />,
       children: [
          { index: true, element: <HomePage /> },
-         { 
-           path: 'incomes', 
-           element: <ProtectedRoute />,  
-           children: [{ index: true, element: <IncomePage /> }] 
+         {
+            path: 'incomes',
+            element: <ProtectedRoute />,
+            children: [{ index: true, element: <IncomePage /> }]
          },
-         { 
-           path: 'expenses', 
-           element: <ProtectedRoute />,  
-           children: [{ index: true, element: <ExpensePage /> }] 
+         {
+            path: 'expenses',
+            element: <ProtectedRoute />,
+            children: [{ index: true, element: <ExpensePage /> }]
          },
-         { 
-           path: 'statistics', 
-           element: <ProtectedRoute />, 
-           children: [{ index: true, element: <StatisticPage /> }] 
+         {
+            path: 'statistics',
+            element: <ProtectedRoute />,
+            children: [{ index: true, element: <StatisticPage /> }]
          },
          { path: 'login', element: <LoginPage /> },
          { path: 'register', element: <RegisterPage /> },
          { path: 'error', element: <NavigateErrorPage /> },
-       ],
+      ],
    }
 ]);
 
