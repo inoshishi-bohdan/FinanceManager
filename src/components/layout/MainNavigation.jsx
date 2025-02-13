@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import classes from './MainNavigation.module.css';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 import { useContext } from 'react';
-import { AuthContext } from '../store/authentication-context';
+import { AuthContext } from '../../store/authentication-context';
 import OffCanvas from './OffCanvas';
 
 function MainNavigation() {

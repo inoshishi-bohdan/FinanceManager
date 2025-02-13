@@ -2,7 +2,7 @@ import React from 'react'
 import {
    flexRender,
 } from '@tanstack/react-table'
-import Filter from './Filter'
+import Filter from '../ui/Filter'
 import { useMediaQuery } from 'react-responsive';
 
 export default function TableHeader({ tableConfiguration }) {

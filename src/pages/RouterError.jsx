@@ -1,5 +1,5 @@
-import MainNavigation from '../components/MainNavigation';
-import PageContent from '../components/PageContent';
+import MainNavigation from '../components/layout/MainNavigation';
+import PageContent from '../components/layout/PageContent';
 import { useRouteError } from 'react-router-dom';
 
 export default function RouterErrorPage() {

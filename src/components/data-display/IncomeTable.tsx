@@ -1,5 +1,7 @@
-import React from 'react'
-import { Income } from '../models/Income'
+import React, { useState } from 'react'
+import { Income } from '../../models/Income'
+import EditIncomeForm from '../ui/EditIncomeForm'
+import DeleteConfirmation from '../ui/DeleteConfirmation'
 import {
    ColumnDef,
    ColumnFiltersState,
@@ -14,8 +16,9 @@ import {
    useReactTable,
 } from '@tanstack/react-table'
 import Table from './Table'
-import RowActions from './RowActions'
-
+import RowActions from '../ui/RowActions'
+import { queryClient, deleteIncome } from '../../util/http'
+import { showSuccessNotification } from '../../util/notification'
 
 declare module '@tanstack/react-table' {
    //allows us to define custom properties for our columns
@@ -24,7 +27,10 @@ declare module '@tanstack/react-table' {
    }
 }
 
-export default function IncomeTable({data}) {
+export default function IncomeTable({ data }) {
+   const [showEditModal, setShowEditModal] = useState(false);
+   const [showDeleteModal, setShowDeleteModal] = useState(false);
+   const [selectedRecord, setSelectedRecord] = useState<Income | null>(null);
    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
    const columns = React.useMemo<ColumnDef<Income, any>[]>(
       () => [
@@ -56,11 +62,11 @@ export default function IncomeTable({data}) {
          {
             header: 'Actions', // Display column header
             id: 'actions', // Important: Give the column an ID
-            cell: props => <RowActions row={props.row} /> 
+            cell: props => <RowActions onEditClick={() => handleEditClick(props.row.original)} onDeleteClick={() => handleDeleteClick(props.row.original)} />
          }
       ],
       []
-   ) 
+   )
    const tableConfig = useReactTable({
       data,
       columns,
@@ -80,7 +86,46 @@ export default function IncomeTable({data}) {
       debugColumns: false,
    })
 
+   function handleEditClick(record) {
+      setSelectedRecord(record);
+      setShowEditModal(true);
+   };
+
+   function handleDeleteClick(record) {
+      setSelectedRecord(record);
+      setShowDeleteModal(true);
+   };
+
+   function handleCloseEditModal() {
+      setShowEditModal(false);
+      setSelectedRecord(null);
+   }
+   function handleCloseDeleteModal() {
+      setShowDeleteModal(false);
+      setSelectedRecord(null);
+   }
+
+   function handleSuccessDelete() {
+      queryClient.invalidateQueries({ queryKey: ['incomes']});
+      showSuccessNotification('Record was successfully deleted');
+      handleCloseDeleteModal();
+   }
+
    return (
-      <Table tableConfiguration={tableConfig} name='My Incomes' />
+      <>
+         <EditIncomeForm
+            isOpen={showEditModal}
+            record={selectedRecord}
+            onClose={handleCloseEditModal}
+         />
+         <DeleteConfirmation
+            isOpen={showDeleteModal}
+            record={selectedRecord}
+            onClose={handleCloseDeleteModal}
+            mutateFn={deleteIncome}
+            onSuccess={handleSuccessDelete}
+         />
+         <Table tableConfiguration={tableConfig} name='My Incomes' />
+      </>
    );
 }

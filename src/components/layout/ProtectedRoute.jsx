@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../store/authentication-context";
+import { AuthContext } from "../../store/authentication-context";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoute() {

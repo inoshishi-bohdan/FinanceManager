@@ -1,8 +1,8 @@
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 import classes from './MainNavigation.module.css';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../store/authentication-context';
+import { AuthContext } from '../../store/authentication-context';
 export default function OffCanvas() {
    const { isAuthenticated } = useContext(AuthContext)
 

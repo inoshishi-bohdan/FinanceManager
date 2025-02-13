@@ -10,12 +10,10 @@ export default function Modal({ open, children, onClose }) {
 
       if (open) {
          modal.showModal();
-         console.log('modal open'); 
       }
 
       return () => {
          modal.close();
-         console.log('modal closed');
       }
    }, [open]);
 

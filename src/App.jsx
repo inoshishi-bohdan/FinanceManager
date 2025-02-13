@@ -9,7 +9,9 @@ import ExpensePage from './pages/Expenses';
 import StatisticPage from './pages/Statistics';
 import NavigateErrorPage from './pages/NavigateError';
 import AuthenticationContextProvider from './store/authentication-context';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/layout/ProtectedRoute';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './util/http';
 
 const router = createBrowserRouter([
    {
@@ -40,11 +42,14 @@ const router = createBrowserRouter([
    }
 ]);
 
+
 function App() {
    return (
-      <AuthenticationContextProvider>
-         <RouterProvider router={router} />;
-      </AuthenticationContextProvider>
+      <QueryClientProvider client={queryClient}>
+         <AuthenticationContextProvider>
+            <RouterProvider router={router} />;
+         </AuthenticationContextProvider>
+      </QueryClientProvider>
    );
 }
 

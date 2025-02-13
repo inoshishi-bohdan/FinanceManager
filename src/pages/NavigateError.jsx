@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import MainNavigation from '../components/MainNavigation';
-import PageContent from '../components/PageContent';
+import MainNavigation from '../components/layout/MainNavigation';
+import PageContent from '../components/layout/PageContent';
 
 export default function NavigateErrorPage() {
    const location = useLocation();
