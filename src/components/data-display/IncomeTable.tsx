@@ -1,24 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Income } from '../../models/Income'
-import EditIncomeForm from '../ui/EditIncomeForm'
-import DeleteConfirmation from '../ui/DeleteConfirmation'
+import IncomeEditor from '../ui/IncomeEditor'
 import {
    ColumnDef,
-   ColumnFiltersState,
    RowData,
-   getCoreRowModel,
-   getFacetedMinMaxValues,
-   getFacetedRowModel,
-   getFacetedUniqueValues,
-   getFilteredRowModel,
-   getPaginationRowModel,
-   getSortedRowModel,
-   useReactTable,
 } from '@tanstack/react-table'
 import Table from './Table'
 import RowActions from '../ui/RowActions'
-import { queryClient, deleteIncome } from '../../util/http'
-import { showSuccessNotification } from '../../util/notification'
+import IncomeCreator from '../ui/IncomeCreator'
+import { IncomeModalContext } from '../../store/income-modal-context'
+import IncomeRemover from '../ui/IncomeRemover'
 
 declare module '@tanstack/react-table' {
    //allows us to define custom properties for our columns
@@ -28,10 +19,7 @@ declare module '@tanstack/react-table' {
 }
 
 export default function IncomeTable({ data }) {
-   const [showEditModal, setShowEditModal] = useState(false);
-   const [showDeleteModal, setShowDeleteModal] = useState(false);
-   const [selectedRecord, setSelectedRecord] = useState<Income | null>(null);
-   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+   const { handleOpenEditModal, handleOpenDeleteModal, handleOpenCreateModal, selectedRecord, setSelectedRecord } = useContext(IncomeModalContext);
    const columns = React.useMemo<ColumnDef<Income, any>[]>(
       () => [
          {
@@ -60,6 +48,10 @@ export default function IncomeTable({ data }) {
             }
          },
          {
+            accessorKey: 'date',
+            header: 'Date',
+         },
+         {
             header: 'Actions', // Display column header
             id: 'actions', // Important: Give the column an ID
             cell: props => <RowActions onEditClick={() => handleEditClick(props.row.original)} onDeleteClick={() => handleDeleteClick(props.row.original)} />
@@ -67,65 +59,23 @@ export default function IncomeTable({ data }) {
       ],
       []
    )
-   const tableConfig = useReactTable({
-      data,
-      columns,
-      state: {
-         columnFilters,
-      },
-      onColumnFiltersChange: setColumnFilters,
-      getCoreRowModel: getCoreRowModel(),
-      getFilteredRowModel: getFilteredRowModel(), //client-side filtering
-      getSortedRowModel: getSortedRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      getFacetedRowModel: getFacetedRowModel(), // client-side faceting
-      getFacetedUniqueValues: getFacetedUniqueValues(), // generate unique values for select filter/autocomplete
-      getFacetedMinMaxValues: getFacetedMinMaxValues(), // generate min/max values for range filter
-      debugTable: true,
-      debugHeaders: true,
-      debugColumns: false,
-   })
 
    function handleEditClick(record) {
       setSelectedRecord(record);
-      setShowEditModal(true);
+      handleOpenEditModal();
    };
 
    function handleDeleteClick(record) {
       setSelectedRecord(record);
-      setShowDeleteModal(true);
+      handleOpenDeleteModal();
    };
-
-   function handleCloseEditModal() {
-      setShowEditModal(false);
-      setSelectedRecord(null);
-   }
-   function handleCloseDeleteModal() {
-      setShowDeleteModal(false);
-      setSelectedRecord(null);
-   }
-
-   function handleSuccessDelete() {
-      queryClient.invalidateQueries({ queryKey: ['incomes']});
-      showSuccessNotification('Record was successfully deleted');
-      handleCloseDeleteModal();
-   }
 
    return (
       <>
-         <EditIncomeForm
-            isOpen={showEditModal}
-            record={selectedRecord}
-            onClose={handleCloseEditModal}
-         />
-         <DeleteConfirmation
-            isOpen={showDeleteModal}
-            record={selectedRecord}
-            onClose={handleCloseDeleteModal}
-            mutateFn={deleteIncome}
-            onSuccess={handleSuccessDelete}
-         />
-         <Table tableConfiguration={tableConfig} name='My Incomes' />
+         <IncomeCreator />
+         <IncomeEditor />
+         <IncomeRemover />
+         <Table onAddRecord={handleOpenCreateModal} data={data} columns={columns} name='My Incomes' />
       </>
    );
 }
