@@ -39,6 +39,7 @@ export default function useMyMutation(mutationFn, onSuccess) {
       mutate,
       isPending,
       responseMessage,
-      data,
+      setResponseMessage,
+      data
    };
 }
