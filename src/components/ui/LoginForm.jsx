@@ -1,5 +1,5 @@
 import ErrorBox from "./ErrorBox";
-import Input from "./Input";
+import AuthInput from "./AuthInput";
 import { login } from "../../util/http";
 import useMyMutation from "../../hooks/useMyMutation";
 import { setAccessToken, setRefreshToken } from "../../util/auth";
@@ -35,8 +35,8 @@ export default function LoginForm() {
       <form className='auth' onSubmit={handleSubmit}>
          <h4 className='text-center auth mb-4'>Login</h4>
          {responseMessage && responseMessage.message && <ErrorBox message={responseMessage.message} errors={responseMessage.errors} />}
-         <Input required type="email" label='Email address' name='email' id='email' />
-         <Input required type="password" label='Password' name='password' id='password' />
+         <AuthInput required type="email" label='Email address' name='email' id='email' />
+         <AuthInput required type="password" label='Password' name='password' id='password' />
          <button type="submit" className={`btn btn-primary auth mt-4`} disabled={isPending}>
             {isPending ? 'Submitting...' : 'Login'}
          </button>
