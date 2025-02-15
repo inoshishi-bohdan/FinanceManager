@@ -16,7 +16,7 @@ import {
    useReactTable,
 } from '@tanstack/react-table'
 
-export default function Table({ data, columns, name }) {
+export default function Table({ data, columns, name, onAddRecord }) {
    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
    const config = useReactTable({
       data,
@@ -40,8 +40,9 @@ export default function Table({ data, columns, name }) {
    return (
       <div className='table-container'>
          <h1 className='table-name'>{name}</h1>
+         <button className='btn btn-success add-button' onClick={onAddRecord}>Add Record +</button>
          <div className='table-responsive'>
-            <table className="table table-hover table-bordered">
+            <table className="table table-hover table-bordered m-0">
                <TableHeader tableConfiguration={config} />
                <tbody>
                   {config.getRowModel().rows.map(row => {
