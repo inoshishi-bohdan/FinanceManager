@@ -6,7 +6,7 @@ import Filter from '../ui/Filter'
 import { useMediaQuery } from 'react-responsive';
 
 export default function TableHeader({ tableConfiguration }) {
-   const isSmallScreen = useMediaQuery({ query: '(max-width: 768px)' });
+   const isSmallScreen = useMediaQuery({ query: '(max-width: 984px)' });
 
    return (
       <thead className='table-light'>
