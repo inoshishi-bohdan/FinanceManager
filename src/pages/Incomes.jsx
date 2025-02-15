@@ -1,10 +1,11 @@
 import IncomeTable from "../components/data-display/IncomeTable";
 import LoadingIndicator from "../components/UI/LoadingIndicator";
 import useMyQuery from "../hooks/useMyQuery";
+import IncomeModalContextProvider from "../store/income-modal-context";
 import { fetchIncomes } from "../util/http";
 
 export default function IncomePage() {
-   const {isPending, data} = useMyQuery(fetchIncomes, ['incomes']);
+   const { isPending, data } = useMyQuery(fetchIncomes, ['incomes']);
    let content;
 
    if (isPending) {
@@ -12,7 +13,11 @@ export default function IncomePage() {
    }
 
    if (data) {
-      content = <IncomeTable data={data} />
+      content = (
+         <IncomeModalContextProvider>
+            <IncomeTable data={data} />
+         </IncomeModalContextProvider>
+      );
    }
 
    return content;
