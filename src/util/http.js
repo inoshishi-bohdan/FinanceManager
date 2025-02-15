@@ -59,6 +59,18 @@ export async function refreshTokens(request) {
    return resData;
 }
 
+export async function fetchCurrencies({ signal }) {
+   const response = await fetch(`${BASE_URL}/api/Currency/getList`, {
+      method: 'GET',
+      signal: signal
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the currencies');
+
+   const resData = await response.json();
+   return resData;
+}
+
 export async function fetchIncomes({ signal }) {
    const accessToken = getAccessToken();
    const response = await fetch(`${BASE_URL}/api/Income/getMyIncomes`, {
@@ -75,8 +87,51 @@ export async function fetchIncomes({ signal }) {
    return resData;
 };
 
+export async function fetchIncomeCategories({ signal }) {
+   const response = await fetch(`${BASE_URL}/api/IncomeCategory/getList`, {
+      method: 'GET',
+      signal: signal
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the income categories');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function createIncome(request) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Income/create`, {
+      method: 'POST',
+      headers: {
+         'Authorization': `Bearer ${accessToken}`,
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request),
+   });
+
+   await validateResponse(response, 'Could not create income record');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function updateIncome({id, request}) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Income/update/${id}`, {
+      method: 'PUT',
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request),
+   });
+
+   await validateResponse(response, 'Could not update this income record');
+}
+
 export async function deleteIncome(id) {
-   const accessToken = getAccessToken(); 
+   const accessToken = getAccessToken();
    const response = await fetch(`${BASE_URL}/api/Income/delete/${id}`, {
       method: 'DELETE',
       headers: {
