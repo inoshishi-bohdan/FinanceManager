@@ -10,6 +10,7 @@ import RowActions from '../ui/RowActions'
 import IncomeCreator from '../ui/IncomeCreator'
 import { IncomeModalContext } from '../../store/income-modal-context'
 import IncomeRemover from '../ui/IncomeRemover'
+import PageContent from '../layout/PageContent'
 
 declare module '@tanstack/react-table' {
    //allows us to define custom properties for our columns
@@ -19,7 +20,7 @@ declare module '@tanstack/react-table' {
 }
 
 export default function IncomeTable({ data }) {
-   const { handleOpenEditModal, handleOpenDeleteModal, handleOpenCreateModal, selectedRecord, setSelectedRecord } = useContext(IncomeModalContext);
+   const { handleOpenEditModal, handleOpenDeleteModal, handleOpenCreateModal, setSelectedRecord } = useContext(IncomeModalContext);
    const columns = React.useMemo<ColumnDef<Income, any>[]>(
       () => [
          {
@@ -70,12 +71,24 @@ export default function IncomeTable({ data }) {
       handleOpenDeleteModal();
    };
 
+   let content;
+
+   if (data.length === 0) {
+      content = (
+         <PageContent title='My Incomes' subtitle="You don't have income records">
+            <button className='btn btn-primary mt-3' onClick={handleOpenCreateModal}>Add Record +</button>
+         </PageContent>
+      );
+   } else {
+      content = (<Table onAddRecord={handleOpenCreateModal} data={data} columns={columns} name='My Incomes' />);
+   }
+
    return (
       <>
          <IncomeCreator />
          <IncomeEditor />
          <IncomeRemover />
-         <Table onAddRecord={handleOpenCreateModal} data={data} columns={columns} name='My Incomes' />
+         {content}
       </>
    );
 }
