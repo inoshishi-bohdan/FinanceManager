@@ -111,9 +111,6 @@ export async function createIncome(request) {
    });
 
    await validateResponse(response, 'Could not create income record');
-
-   const resData = await response.json();
-   return resData;
 }
 
 export async function updateIncome({id, request}) {
@@ -144,7 +141,7 @@ export async function deleteIncome(id) {
 
 export async function fetchExpenses({ signal }) {
    const accessToken = getAccessToken();
-   const response = await fetch(`${BASE_URL}/api/Income/getMyExpenses`, {
+   const response = await fetch(`${BASE_URL}/api/Expense/getMyExpenses`, {
       method: 'GET',
       signal: signal,
       headers: {
@@ -156,5 +153,57 @@ export async function fetchExpenses({ signal }) {
 
    const resData = await response.json();
    return resData;
+}
+
+export async function fetchExpenseCategories({ signal }) {
+   const response = await fetch(`${BASE_URL}/api/ExpenseCategory/getList`, {
+      method: 'GET',
+      signal: signal
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the expense categories');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function createExpense(request) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Expense/create`, {
+      method: 'POST',
+      headers: {
+         'Authorization': `Bearer ${accessToken}`,
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request),
+   });
+
+   await validateResponse(response, 'Could not create expense record');
+}
+
+export async function updateExpense({id, request}) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Expense/update/${id}`, {
+      method: 'PUT',
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request),
+   });
+
+   await validateResponse(response, 'Could not update this expense record');
+}
+
+export async function deleteExpense(id) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Expense/delete/${id}`, {
+      method: 'DELETE',
+      headers: {
+         'Authorization': `Bearer ${accessToken}`
+      }
+   });
+
+   await validateResponse(response, 'Could not delete this expense record');
 }
 
