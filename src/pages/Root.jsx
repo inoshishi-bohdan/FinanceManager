@@ -15,7 +15,7 @@ export default function RootLayout() {
    }
 
    useEffect(() => {
-      const interval = 1000 * 60 * 14;
+      const interval = 1000 * 60 * 13;
       let intervalId;
 
       function handleRefreshTokens() {
