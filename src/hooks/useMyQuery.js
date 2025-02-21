@@ -4,12 +4,13 @@ import { useContext } from "react";
 import { AuthContext } from "../store/authentication-context";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useMyQuery(queryFn, queryKey) {
+export default function useMyQuery(queryFn, queryKey, enabled = true) {
    const navigate = useNavigate();
    const { changeIsAuthenticated } = useContext(AuthContext);
-   const { data, isPending, isError, error } = useQuery({
+   const { data, isPending, isLoading, isError, error } = useQuery({
       queryKey: queryKey,
-      queryFn: queryFn
+      queryFn: queryFn,
+      enabled: enabled
    });
 
    if (isError) {
@@ -31,6 +32,7 @@ export default function useMyQuery(queryFn, queryKey) {
 
    return {
       data,
-      isPending
+      isPending,
+      isLoading
    };
 }
