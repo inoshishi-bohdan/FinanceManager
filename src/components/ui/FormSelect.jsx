@@ -1,4 +1,4 @@
-export default function Select({ text, label, id, options, ...props }) {
+export default function FormSelect({ text, label, id, options, ...props }) {
    return (
       <div className="mb-2">
          <label htmlFor={id} className="form-label">{label}</label>

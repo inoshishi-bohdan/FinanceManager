@@ -1,6 +1,6 @@
 import useMyQuery from '../../hooks/useMyQuery'
 import { fetchCurrencies, fetchExpenseCategories } from "../../util/http";
-import Select from "./Select";
+import FormSelect from "./FormSelect";
 import modalClasses from './Modal.module.css'
 import Input from "./Input";
 import useMyMutation from '../../hooks/useMyMutation';
@@ -62,7 +62,7 @@ export default function ExpenseForm({ title, record, onCancel, mutationFn, onSuc
             required
          />
          {isPendingCurrencies && <p>Loading selectable currencies...</p>}
-         {currencies && <Select
+         {currencies && <FormSelect
             id='currency'
             name='currencyId'
             label='Currency'
@@ -72,7 +72,7 @@ export default function ExpenseForm({ title, record, onCancel, mutationFn, onSuc
             required
          />}
          {isPendingCategories && <p>Loading selectable categories...</p>}
-         {expenseCategories && <Select
+         {expenseCategories && <FormSelect
             id='expenseCategory'
             name='expenseCategoryId'
             label='Expense category'
