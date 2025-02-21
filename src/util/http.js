@@ -113,7 +113,7 @@ export async function createIncome(request) {
    await validateResponse(response, 'Could not create income record');
 }
 
-export async function updateIncome({id, request}) {
+export async function updateIncome({ id, request }) {
    const accessToken = getAccessToken();
    const response = await fetch(`${BASE_URL}/api/Income/update/${id}`, {
       method: 'PUT',
@@ -181,7 +181,7 @@ export async function createExpense(request) {
    await validateResponse(response, 'Could not create expense record');
 }
 
-export async function updateExpense({id, request}) {
+export async function updateExpense({ id, request }) {
    const accessToken = getAccessToken();
    const response = await fetch(`${BASE_URL}/api/Expense/update/${id}`, {
       method: 'PUT',
@@ -207,3 +207,124 @@ export async function deleteExpense(id) {
    await validateResponse(response, 'Could not delete this expense record');
 }
 
+export async function fetchIncomeStatistic({ signal, request }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Statistic/income`, {
+      method: 'POST',
+      signal: signal,
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request)
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the income statistic');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchExpenseStatistic({ signal, request }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Statistic/expense`, {
+      method: 'POST',
+      signal: signal,
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request)
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the expense statistic');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchNetWorthStatistic({ signal, request }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Statistic/netWorth`, {
+      method: 'POST',
+      signal: signal,
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request)
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the net worth statistic');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchIncomeDistribution({ signal, request }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Statistic/incomeDistribution`, {
+      method: 'POST',
+      signal: signal,
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request)
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the income distribution statistic');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchExpenseDistribution({ signal, request }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Statistic/expenseDistribution`, {
+      method: 'POST',
+      signal: signal,
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request)
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the expense distribution statistic');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchIncomeRecordPeriod({ signal }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Statistic/getIncomeRecordPeriod`, {
+      method: 'GET',
+      signal: signal,
+      headers: {
+         'Authorization': `Bearer ${accessToken}`
+      }
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the income record period');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchExpenseRecordPeriod({ signal }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/Statistic/getExpenseRecordPeriod`, {
+      method: 'GET',
+      signal: signal,
+      headers: {
+         'Authorization': `Bearer ${accessToken}`
+      }
+   });
+
+   await validateResponse(response, 'An error occurred while fetching the expense record period');
+
+   const resData = await response.json();
+   return resData;
+}
