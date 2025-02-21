@@ -1,4 +1,4 @@
-import LoadingIndicator from "../components/UI/LoadingIndicator";
+import LoadingIndicator from "../components/ui/LoadingIndicator";
 import { fetchExpenses } from "../util/http";
 import useMyQuery from "../hooks/useMyQuery";
 import ExpenseModalContextProvider from "../store/expense-modal-context";
