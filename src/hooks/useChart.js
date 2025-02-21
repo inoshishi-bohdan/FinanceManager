@@ -9,9 +9,9 @@ export default function useChart({ chartQueryFn, chartQueryKey, recordPeriodQuer
    const { isPending: isPendingRecordPeriod, data: recordPeriod } = useMyQuery(recordPeriodQueryFn, recordPeriodQueryKey);
    const { data: currencies, isPending: isPendingCurrencies } = useMyQuery(fetchCurrencies, ['currencies']);
    const { isLoading: isLoadingChartData, data: chartData } = useMyQuery(
-      ({ signal }) => chartQueryFn({
+      ({ signal, queryKey }) => chartQueryFn({
          signal: signal,
-         request: { currencyId: selectedCurrency, year: selectedYear }
+         request: queryKey[queryKey.length - 1]
       }),
       [...chartQueryKey, { currencyId: selectedCurrency, year: selectedYear }],
       !!(selectedYear && selectedCurrency));
