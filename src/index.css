@@ -33,8 +33,9 @@ main {
    width: 80px;
    height: 80px;
    margin: 1rem 0;
- }
- .lds-ring div {
+}
+
+.lds-ring div {
    box-sizing: border-box;
    display: block;
    position: absolute;
@@ -45,25 +46,29 @@ main {
    border-radius: 50%;
    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
    border-color: whitesmoke transparent transparent transparent;
- }
- .lds-ring div:nth-child(1) {
+}
+
+.lds-ring div:nth-child(1) {
    animation-delay: -0.45s;
- }
- .lds-ring div:nth-child(2) {
+}
+
+.lds-ring div:nth-child(2) {
    animation-delay: -0.3s;
- }
- .lds-ring div:nth-child(3) {
+}
+
+.lds-ring div:nth-child(3) {
    animation-delay: -0.15s;
- }
- 
- @keyframes lds-ring {
+}
+
+@keyframes lds-ring {
    0% {
-     transform: rotate(0deg);
+      transform: rotate(0deg);
    }
+
    100% {
-     transform: rotate(360deg);
+      transform: rotate(360deg);
    }
- }
+}
 
 .page-content {
    color: white;
@@ -124,20 +129,21 @@ h4.auth {
 }
 
 .table td {
-   vertical-align: middle; 
+   vertical-align: middle;
 }
 
-.filter-input, .filter-select {
-   width: 150px; /* Initial/Preferred width */
-   max-width: 150px; /* Maximum width */
-   min-width: 100px; /* Minimum width */
+.filter-input,
+.filter-select {
+   width: 150px;
+   max-width: 150px;
+   min-width: 100px;
    border-width: 1.5px;
    margin-right: 3px;
    margin-top: 3px;
 }
 
 .add-button {
- margin-bottom: 10px;  
+   margin-bottom: 10px;
 }
 
 .action-button {
@@ -170,9 +176,64 @@ h4.auth {
    max-width: 250px !important;
 }
 
+.chart-container {
+   margin-top: 100px;
+   max-width: 1700px;
+   width: 100%;
+   display: grid;
+   gap: 20px;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 1fr 1fr;
+}
+
+.chart {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.chart-header {
+   min-height: 70px;
+   width: 100%;
+   padding: 20px;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: space-between;
+   gap: 5px;
+   background-color: whitesmoke;
+}
+
+.chart-header select {
+   max-width: 200px;
+}
+
+.chart-body {
+   height: 500px;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: white;
+}
+
+@media (max-width: 1200px) {
+   .chart-container {
+      grid-template-columns: 1fr;
+      width: 75%;
+   }
+}
+
 @media (max-width: 850px) {
-   .table th, td {
+
+   .table th,
+   td {
       padding: 3px !important;
+   }
+
+   .chart-container {
+      width: 85%;
    }
 }
 
@@ -183,27 +244,17 @@ h4.auth {
       min-width: 0;
       padding: 30px;
    }
-}
 
-@media (max-width: 435px) {
-   main {
-      padding-top: calc(var(--nav-height) + 50px);
-   }
-   
-   .table {
-      font-size: 0.7rem !important;
+   .chart-container {
+      width: 100%;
    }
 
-   .table th, td {
-      text-align: center;
-   }
-
-   .action-button {
-      width: 45px !important;
+   .chart-header {
+      padding: 10px;
    }
 }
 
-@media (max-width: 470px) { 
+@media (max-width: 470px) {
    .action-button {
       width: 50px;
       padding: 3px !important;
@@ -218,4 +269,21 @@ h4.auth {
    }
 }
 
+@media (max-width: 435px) {
+   main {
+      padding-top: calc(var(--nav-height) + 50px);
+   }
 
+   .table {
+      font-size: 0.7rem !important;
+   }
+
+   .table th,
+   td {
+      text-align: center;
+   }
+
+   .action-button {
+      width: 45px !important;
+   }
+}
