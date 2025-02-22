@@ -193,15 +193,19 @@ h4.auth {
    align-items: center;
 }
 
+.big-chart {
+   grid-column: 1 / span 2;
+}
+
 .chart-header {
    min-height: 70px;
    width: 100%;
    padding: 20px;
    display: flex;
-   flex-wrap: wrap;
+   flex-direction: column;
    align-items: center;
    justify-content: space-between;
-   gap: 5px;
+   gap: 10px;
    background-color: whitesmoke;
 }
 
@@ -221,7 +225,10 @@ h4.auth {
 @media (max-width: 1200px) {
    .chart-container {
       grid-template-columns: 1fr;
-      width: 75%;
+   }
+
+   .big-chart {
+      grid-column: 1;
    }
 }
 
@@ -232,8 +239,8 @@ h4.auth {
       padding: 3px !important;
    }
 
-   .chart-container {
-      width: 85%;
+   .chart-body {
+      height: 400px;
    }
 }
 
@@ -252,6 +259,9 @@ h4.auth {
    .chart-header {
       padding: 10px;
    }
+   .chart-body {
+      height: 300px;
+   }
 }
 
 @media (max-width: 470px) {
@@ -266,6 +276,10 @@ h4.auth {
       margin-top: 10px;
       padding: 5px !important;
       font-size: 0.7rem !important;
+   }
+
+   .chart-body {
+      height: 250px;
    }
 }
 
