@@ -20,7 +20,7 @@ export default function NetWorthChart() {
          chartQueryFn: fetchNetWorthStatistic,
          chartQueryKey: ['incomes, expenses, net-worth-statistic'],
          recordPeriodQueryFn: fetchIncomeRecordPeriod,
-         recordPeriodQueryKey: ['net-worth-record-period']
+         recordPeriodQueryKey: ['incomes, expenses, net-worth-record-period']
       });
    
       let content;
@@ -45,7 +45,7 @@ export default function NetWorthChart() {
       }
    
       return (
-         <div className='chart'>
+         <div className='chart big-chart'>
             {content}
          </div>
       );

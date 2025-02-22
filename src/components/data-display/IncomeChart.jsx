@@ -20,7 +20,7 @@ export default function IncomeChart() {
       chartQueryFn: fetchIncomeStatistic,
       chartQueryKey: ['incomes, income-statistic'],
       recordPeriodQueryFn: fetchIncomeRecordPeriod,
-      recordPeriodQueryKey: ['income-record-period']
+      recordPeriodQueryKey: ['incomes, income-record-period']
    });
 
    let content;

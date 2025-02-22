@@ -20,7 +20,7 @@ export default function ExpenseChart() {
       chartQueryFn: fetchExpenseStatistic,
       chartQueryKey: ['expenses, expense-statistic'],
       recordPeriodQueryFn: fetchExpenseRecordPeriod,
-      recordPeriodQueryKey: ['expense-record-period']
+      recordPeriodQueryKey: ['expenses, expense-record-period']
    });
 
    let content;
