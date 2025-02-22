@@ -8,7 +8,7 @@ import {
 import LoadingIndicator from "../ui/LoadingIndicator";
 
 export default function LineChart({ chartData, isLoadingChartData }) {
-   return <div className="chart-body">
+   return (<div className="chart-body">
       {isLoadingChartData && <LoadingIndicator />}
       {chartData && <>
          <VictoryChart
@@ -33,5 +33,6 @@ export default function LineChart({ chartData, isLoadingChartData }) {
             />
          </VictoryChart>
       </>}
-   </div>;
+   </div>
+   );
 }
