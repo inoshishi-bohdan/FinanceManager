@@ -80,7 +80,7 @@ export default function ExpenseTable({ data }) {
          </PageContent>
       );
    } else {
-      content = (<Table onAddRecord={handleOpenCreateModal} data={data} columns={columns} name='My Expense' />);
+      content = (<Table onAddRecord={handleOpenCreateModal} data={data} columns={columns} name='My Expenses' />);
    }
 
    return (
