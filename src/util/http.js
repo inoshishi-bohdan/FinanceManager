@@ -328,3 +328,69 @@ export async function fetchExpenseRecordPeriod({ signal }) {
    const resData = await response.json();
    return resData;
 }
+
+export async function fetchProfileImage({ signal, id }) {
+   const response = await fetch(`${BASE_URL}/api/ProfileImage/${id}`, {
+      method: 'GET',
+      signal: signal
+   });
+
+   await validateResponse(response, `An error occurred while fetching profile image with ID ${id}`);
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchProfileImages({ signal }) {
+   const response = await fetch(`${BASE_URL}/api/ProfileImage/getList`, {
+      method: 'GET',
+      signal: signal
+   });
+
+   await validateResponse(response, 'An error occurred while fetching available profile images');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function fetchMyProfileInfo({ signal }) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/User/getMyInfo`, {
+      method: 'GET',
+      signal: signal,
+      headers: {
+         'Authorization': `Bearer ${accessToken}`
+      }
+   });
+
+   await validateResponse(response, 'An error occurred while fetching your user data');
+
+   const resData = await response.json();
+   return resData;
+}
+
+export async function updateMyProfileInfo(request) {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/User/updateMyInfo`, {
+      method: 'PUT',
+      headers: {
+         'Content-Type': 'application/json',
+         'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(request),
+   });
+
+   await validateResponse(response, 'Could not update your user information');
+}
+
+export async function deleteMyAccount() {
+   const accessToken = getAccessToken();
+   const response = await fetch(`${BASE_URL}/api/User/deleteMyAccount/`, {
+      method: 'DELETE',
+      headers: {
+         'Authorization': `Bearer ${accessToken}`
+      }
+   });
+
+   await validateResponse(response, 'Could not delete your user account');
+}
