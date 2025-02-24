@@ -29,6 +29,9 @@ export default function OffCanvas() {
                {isAuthenticated && <li className="nav-item" data-bs-dismiss="offcanvas">
                   <NavLink className={({ isActive }) => `nav-link mx-lg-2 ${classes['custom-nav-link']} ${isActive ? classes['active'] : ''}`} to='/statistics'>Statistics</NavLink>
                </li>}
+               {isAuthenticated && <li className="nav-item" data-bs-dismiss="offcanvas">
+                  <NavLink className={({ isActive }) => `nav-link mx-lg-2 ${classes['custom-nav-link']} ${isActive ? classes['active'] : ''}`} to='/settings'>Settings</NavLink>
+               </li>}
             </ul>
          </div>
       </div>
