@@ -12,6 +12,7 @@ import AuthenticationContextProvider from './store/authentication-context';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './util/http';
+import SettingPage from './pages/Settings';
 
 const router = createBrowserRouter([
    {
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
             path: 'statistics',
             element: <ProtectedRoute />,
             children: [{ index: true, element: <StatisticPage /> }]
+         },
+         {
+            path: 'settings',
+            element: <ProtectedRoute />,
+            children: [{ index: true, element: <SettingPage /> }]
          },
          { path: 'login', element: <LoginPage /> },
          { path: 'register', element: <RegisterPage /> },
