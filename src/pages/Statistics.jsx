@@ -6,12 +6,16 @@ import ExpenseDistributionChart from "../components/data-display/ExpenseDistribu
 
 export default function StatisticPage() {
    return (
-      <div className="chart-container">
-         <IncomeChart />
-         <IncomeDistributionChart />
-         <ExpenseChart />
-         <ExpenseDistributionChart />
-         <NetWorthChart />
-      </div>
+      <>
+         <h1 className="statistic-title">My Statistic</h1>
+         <div className="chart-container">
+            <IncomeChart />
+            <IncomeDistributionChart />
+            <ExpenseChart />
+            <ExpenseDistributionChart />
+            <NetWorthChart />
+         </div>
+      </>
+
    );
 }
