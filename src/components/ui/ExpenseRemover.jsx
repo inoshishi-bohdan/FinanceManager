@@ -8,7 +8,7 @@ import Modal from "./Modal";
 
 export default function ExpenseRemover() {
       const {deleteModalIsOpen, handleCloseDeleteModal, selectedRecord, setSelectedRecord} = useContext(ExpenseModalContext);
-   
+      
       function handleSuccessDelete() {
          queryClient.invalidateQueries({ queryKey: ['expenses'] });
          showSuccessNotification('Record was successfully deleted');
@@ -18,7 +18,7 @@ export default function ExpenseRemover() {
 
    return (
       <Modal open={deleteModalIsOpen} onClose={handleCloseDeleteModal}>
-         <DeleteConfirmation record={selectedRecord} mutateFn={deleteExpense} onSuccess={handleSuccessDelete} onCancel={handleCloseDeleteModal}  />
+         <DeleteConfirmation mutateFn={() => deleteExpense(selectedRecord?.id ?? 0)} onSuccess={handleSuccessDelete} onCancel={handleCloseDeleteModal}  />
       </Modal>
    );
 }

@@ -18,7 +18,7 @@ export default function IncomeRemover() {
 
    return (
       <Modal open={deleteModalIsOpen} onClose={handleCloseDeleteModal}>
-         <DeleteConfirmation record={selectedRecord} mutateFn={deleteIncome} onSuccess={handleSuccessDelete} onCancel={handleCloseDeleteModal}  />
+         <DeleteConfirmation mutateFn={() => deleteIncome(selectedRecord?.id ?? 0)} onSuccess={handleSuccessDelete} onCancel={handleCloseDeleteModal}  />
       </Modal>
    );
 }
