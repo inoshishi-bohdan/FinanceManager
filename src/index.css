@@ -206,6 +206,13 @@ h4.auth {
    background-color: white;
 }
 
+.main-profile-image {
+   margin: 20px 0;
+   width: 300px;
+   height: 300px;
+   border-radius: 50%;
+}
+
 @media (max-width: 1200px) {
    .chart-container {
       grid-template-columns: 1fr;
@@ -253,6 +260,11 @@ h4.auth {
 
    .info-card {
       width: 100%;
+   }
+
+   .main-profile-image {
+      height: 200px;
+      width: 200px;
    }
 }
 
