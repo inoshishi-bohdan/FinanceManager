@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-
+import { queryClient } from "../util/http";
 
 export const AuthContext = createContext({
    isAuthenticated: false,
@@ -16,6 +16,7 @@ export default function AuthenticationContextProvider({ children }) {
       if (value === false) {
          localStorage.removeItem('accessToken');
          localStorage.removeItem('refreshToken');
+         queryClient.removeQueries();
       }
    }
 
