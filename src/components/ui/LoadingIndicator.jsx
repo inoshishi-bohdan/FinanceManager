@@ -1,6 +1,8 @@
+import classes from './LoadingIndicator.module.css'
+
 export default function LoadingIndicator() {
   return (
-    <div className="lds-ring">
+    <div className={classes['lds-ring']}>
       <div></div>
       <div></div>
       <div></div>
