@@ -43,8 +43,8 @@ export default function UserCard() {
             <img className={classes['profile-img']} src={`${BASE_URL}/images/${profileImage.path}`} alt={profileImage.caption} />
             <p className='fs-2 fw-semibold m-0'>{profileInfo.userName}</p>
             <div className='d-flex w-100 align-items-center justify-content-center gap-2'>
-               <button className='btn btn-outline-success' onClick={handleEditClick}>Edit Profile</button>
-               <button className='btn btn-outline-danger' onClick={handleOpenDeleteModal}>Delete Account</button>
+               <button className='btn btn-success' onClick={handleEditClick}>Edit Profile</button>
+               <button className='btn btn-danger' onClick={handleOpenDeleteModal}>Delete Account</button>
             </div>
          </>;
       }
