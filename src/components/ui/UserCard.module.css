@@ -1,0 +1,35 @@
+.user-card {
+   max-width: 900px;
+   width: 45%;
+   min-height: 400px !important;
+   margin-top: 60px;
+   padding: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 15px
+}
+
+.profile-img {
+   height: 180px;
+   width: 180px;
+   border-radius: 50%;
+   object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+   .user-card {
+      width: 70%;
+   }
+}
+
+@media (max-width: 500px) {
+   .user-card {
+      width: 100%;
+   }
+
+   .profile-img {
+      height: 150px;
+      width: 150px;
+   }
+}
