@@ -4,15 +4,18 @@ import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
 import RouterErrorPage from './pages/RouterError';
 import HomePage from './pages/Home';
-import IncomePage from './pages/Incomes';
-import ExpensePage from './pages/Expenses';
-import StatisticPage from './pages/Statistics';
 import NavigateErrorPage from './pages/NavigateError';
 import AuthenticationContextProvider from './store/authentication-context';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './util/http';
-import SettingPage from './pages/Settings';
+import { lazy, Suspense } from 'react';
+import LoadingIndicator from './components/ui/LoadingIndicator';
+
+const IncomePage = lazy(() => import('./pages/Incomes'));
+const ExpensePage = lazy(() => import('./pages/Expenses'));
+const StatisticPage = lazy(() => import('./pages/Statistics'));
+const SettingPage = lazy(() => import('./pages/Settings'));
 
 const router = createBrowserRouter([
    {
@@ -24,22 +27,46 @@ const router = createBrowserRouter([
          {
             path: 'incomes',
             element: <ProtectedRoute />,
-            children: [{ index: true, element: <IncomePage /> }]
+            children: [{
+               index: true, element: (
+                  <Suspense fallback={<LoadingIndicator />}>
+                     < IncomePage />
+                  </Suspense>
+               )
+            }]
          },
          {
             path: 'expenses',
             element: <ProtectedRoute />,
-            children: [{ index: true, element: <ExpensePage /> }]
+            children: [{
+               index: true, element: (
+                  <Suspense fallback={<LoadingIndicator />}>
+                     <ExpensePage />
+                  </Suspense>
+               )
+            }]
          },
          {
             path: 'statistics',
             element: <ProtectedRoute />,
-            children: [{ index: true, element: <StatisticPage /> }]
+            children: [{
+               index: true, element: (
+                  <Suspense fallback={<LoadingIndicator />}>
+                     <StatisticPage />
+                  </Suspense>
+               )
+            }]
          },
          {
             path: 'settings',
             element: <ProtectedRoute />,
-            children: [{ index: true, element: <SettingPage /> }]
+            children: [{
+               index: true, element: (
+                  <Suspense fallback={<LoadingIndicator />}>
+                     <SettingPage />
+                  </Suspense>
+               )
+            }]
          },
          { path: 'login', element: <LoginPage /> },
          { path: 'register', element: <RegisterPage /> },
