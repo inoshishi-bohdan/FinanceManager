@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { queryClient } from "../util/http";
+import { showInfoNotification } from "../util/notification";
 
 export const AuthContext = createContext({
    isAuthenticated: false,
@@ -17,6 +18,7 @@ export default function AuthenticationContextProvider({ children }) {
          localStorage.removeItem('accessToken');
          localStorage.removeItem('refreshToken');
          queryClient.removeQueries();
+         showInfoNotification('You were logged out');
       }
    }
 
