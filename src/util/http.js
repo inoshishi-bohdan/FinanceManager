@@ -1,7 +1,7 @@
 import { getAccessToken } from "./auth";
 import { QueryClient } from "@tanstack/react-query";
 
-export const BASE_URL = 'https://localhost:7209';
+export const BASE_URL = import.meta.env.VITE_BASE_URL;;
 export const queryClient = new QueryClient();
 
 async function validateResponse(response, errorMessage) {
