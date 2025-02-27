@@ -32,6 +32,7 @@ export default function Table({ data, columns, name, onAddRecord }) {
       getFacetedRowModel: getFacetedRowModel(), // client-side faceting
       getFacetedUniqueValues: getFacetedUniqueValues(), // generate unique values for select filter/autocomplete
       getFacetedMinMaxValues: getFacetedMinMaxValues(), // generate min/max values for range filter
+      autoResetPageIndex: false, //turn off auto reset of pageIndex
       debugTable: true,
       debugHeaders: true,
       debugColumns: false,
