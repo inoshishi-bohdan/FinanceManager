@@ -32,6 +32,8 @@ export default function RootLayout() {
          mutate(request);
       }
 
+      handleRefreshTokens();
+
       intervalId = setInterval(handleRefreshTokens, interval);
       return () => clearInterval(intervalId);
    }, [mutate]);
