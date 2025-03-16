@@ -4,6 +4,9 @@ import AuthInput from "./AuthInput";
 import { register } from "../../util/http";
 import useMyMutation from "../../hooks/useMyMutation";
 import { showSuccessNotification } from "../../util/notification";
+import { motion } from "framer-motion";
+import SubmitButton from "./SubmitButton";
+
 
 export default function RegisterForm() {
    const navigate = useNavigate();
@@ -28,15 +31,19 @@ export default function RegisterForm() {
    }
 
    return (
-      <form className='auth' onSubmit={handleSubmit}>
+      <motion.form
+         className='auth'
+         onSubmit={handleSubmit}
+         initial={{ opacity: 0, y: 30 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{duration: 0.4}}  
+      >
          <h4 className='text-center auth mb-4'>Sign Up</h4>
          {responseMessage && responseMessage.message && <ErrorBox message={responseMessage.message} errors={responseMessage.errors} />}
          <AuthInput required type="text" label='User name' name='userName' id='userName' />
          <AuthInput required type="email" label='Email address' name='email' id='email' />
          <AuthInput required type="password" label='Password' name='password' id='password' />
-         <button type="submit" className={`btn btn-primary auth mt-4`} disabled={isPending}>
-            {isPending ? 'Submitting...' : 'Sign Up'}
-         </button>
-      </form>
+         <SubmitButton isPending={isPending} text='Sign Up' />
+      </motion.form>
    );
 }
