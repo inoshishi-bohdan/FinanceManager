@@ -8,6 +8,7 @@ import InfoCard from "../components/ui/InfoCard";
 import useMyQuery from '../hooks/useMyQuery';
 import { BASE_URL, fetchMyProfileInfo, fetchProfileImage, fetchProfileImages } from '../util/http'
 import LoadingIndicator from '../components/ui/LoadingIndicator';
+import { motion } from "framer-motion";
 
 export default function HomePage() {
    const { isAuthenticated } = useContext(AuthContext);
@@ -33,9 +34,25 @@ export default function HomePage() {
 
       if (profileInfo && profileImage) {
          content = <>
-            <img className="main-profile-image" src={`${BASE_URL}/images/${profileImage.path}`} alt={profileImage.caption} />
-            <h1 className="text-white">Welcome, {profileInfo.userName}</h1>
-            <h4 className="text-white">Let's organise your finances</h4>
+            <motion.img
+            initial={{opacity: 0, scale: 0}}
+            animate={{opacity: 1, scale: 1}}
+            transition={{duration: 0.5 }} 
+            className="main-profile-image"
+              src={`${BASE_URL}/images/${profileImage.path}`}
+               alt={profileImage.caption} />
+            <motion.h1
+               initial={{ x: -20, opacity: 0 }}
+               animate={{ x: 0, opacity: 1 }}
+               transition={{ duration: 0.5 }}
+               className="text-white text-center"
+            >Welcome, {profileInfo.userName}</motion.h1>
+            <motion.h4
+               initial={{ x: 20, opacity: 0 }}
+               animate={{ x: 0, opacity: 1 }}
+               transition={{ duration: 0.5 }}
+               className="text-white  text-center"
+            >Let's organise your finances</motion.h4>
          </>
       }
    } else {
