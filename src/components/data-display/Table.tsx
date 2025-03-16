@@ -15,6 +15,7 @@ import {
    getSortedRowModel,
    useReactTable,
 } from '@tanstack/react-table'
+import { motion } from 'framer-motion'
 
 export default function Table({ data, columns, name, onAddRecord }) {
    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -39,9 +40,17 @@ export default function Table({ data, columns, name, onAddRecord }) {
    })
 
    return (
-      <div className='table-container'>
+      <motion.div
+      initial={{y: -40, opacity: 0}}
+      animate={{y: 0, opacity: 1}}
+      className='table-container'>
          <h1 className='table-name'>{name}</h1>
-         <button className='btn btn-success add-button' onClick={onAddRecord}>Add Record +</button>
+         <motion.button
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: 'spring' }}
+            className='btn btn-success add-button'
+            onClick={onAddRecord}
+         >Add Record +</motion.button>
          <div className='table-responsive'>
             <table className="table table-hover table-bordered m-0">
                <TableHeader tableConfiguration={config} />
@@ -66,6 +75,6 @@ export default function Table({ data, columns, name, onAddRecord }) {
             </table>
          </div>
          <TablePagination tableConfiguration={config} />
-      </div>
+      </motion.div>
    );
 }
