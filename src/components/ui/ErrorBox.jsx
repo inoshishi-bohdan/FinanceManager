@@ -1,13 +1,23 @@
 import classes from "./ErrorBox.module.css";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function ErrorBox({ message, errors, onConfirm }) {
    return (
-      <div className={classes['error']}>
+      <motion.div
+         initial={{ opacity: 0, y: -30 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{ duration: 0.4 }}
+         className={classes['error']}>
          <h2>{message}</h2>
          {errors && (
-            <ul>
-               {Object.values(errors).map(err => <li key={err}>{err}</li>)}
-            </ul>
+            <motion.ul>
+               <AnimatePresence>
+                  {Object.values(errors).map(err => <motion.li
+                     layout
+                     exit={{ y: -20, opacity: 0 }}
+                     key={err}>{err}</motion.li>)}
+               </AnimatePresence>
+            </motion.ul>
          )}
          {onConfirm && (
             <div className={classes['confirmation-actions']}>
@@ -16,6 +26,6 @@ export default function ErrorBox({ message, errors, onConfirm }) {
                </button>
             </div>
          )}
-      </div>
+      </motion.div>
    );
 }
