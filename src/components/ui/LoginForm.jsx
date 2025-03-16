@@ -6,9 +6,11 @@ import { setAccessToken, setRefreshToken } from "../../util/auth";
 import { useContext } from "react";
 import { AuthContext } from "../../store/authentication-context";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import SubmitButton from "./SubmitButton";
 
 export default function LoginForm() {
-   const {changeIsAuthenticated} = useContext(AuthContext);
+   const { changeIsAuthenticated } = useContext(AuthContext);
    const navigate = useNavigate();
    const { mutate, responseMessage, isPending } = useMyMutation(login, handleSuccess);
 
@@ -32,14 +34,18 @@ export default function LoginForm() {
    }
 
    return (
-      <form className='auth' onSubmit={handleSubmit}>
+      <motion.form
+         initial={{opacity: 0, y: 30}}
+         animate={{opacity: 1, y: 0}}
+         transition={{duration: 0.4}} 
+         className='auth'
+         onSubmit={handleSubmit}
+      >
          <h4 className='text-center auth mb-4'>Login</h4>
          {responseMessage && responseMessage.message && <ErrorBox message={responseMessage.message} errors={responseMessage.errors} />}
          <AuthInput required type="email" label='Email address' name='email' id='email' />
          <AuthInput required type="password" label='Password' name='password' id='password' />
-         <button type="submit" className={`btn btn-primary auth mt-4`} disabled={isPending}>
-            {isPending ? 'Submitting...' : 'Login'}
-         </button>
-      </form>
+         <SubmitButton isPending={isPending} text='Login' />
+      </motion.form>
    );
 }
