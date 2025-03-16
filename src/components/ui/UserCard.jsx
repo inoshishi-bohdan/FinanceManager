@@ -6,6 +6,7 @@ import UserEditForm from './UserEditForm';
 import classes from './UserCard.module.css'
 import { UserModalContext } from '../../store/user-modal-context';
 import UserRemover from './UserRemover';
+import { motion } from 'framer-motion';
 
 export default function UserCard() {
    const [editMode, setEditMode] = useState(false);
@@ -40,7 +41,14 @@ export default function UserCard() {
          content = <UserEditForm profileData={profileInfo} onCancel={handleCancelClick} />
       } else {
          content = <>
-            <img className={classes['profile-img']} src={`${BASE_URL}/images/${profileImage.path}`} alt={profileImage.caption} />
+            <motion.img
+               initial={{ opacity: 0, scale: 0 }}
+               animate={{ opacity: 1, scale: 1 }}
+               transition={{ duration: 0.5 }}
+               className={classes['profile-img']}
+               src={`${BASE_URL}/images/${profileImage.path}`}
+               alt={profileImage.caption}
+            />
             <p className='fs-2 fw-semibold m-0'>{profileInfo.userName}</p>
             <div className='d-flex w-100 align-items-center justify-content-center gap-2'>
                <button className='btn btn-success' onClick={handleEditClick}>Edit Profile</button>
