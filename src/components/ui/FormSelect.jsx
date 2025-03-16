@@ -1,6 +1,11 @@
+import { motion } from "framer-motion";
+
 export default function FormSelect({ text, label, id, options, ...props }) {
    return (
-      <div className="mb-2">
+      <motion.div
+      initial={{y: -20, opacity: 0}}
+      animate={{y: 0, opacity: 1}}
+      className="mb-2">
          <label htmlFor={id} className="form-label">{label}</label>
          <select {...props} id={id} className="form-select" aria-label="Default select example" >
             <option value='' disabled>{text}</option>
@@ -8,6 +13,6 @@ export default function FormSelect({ text, label, id, options, ...props }) {
                {option.name}
             </option>)}
          </select>
-      </div>
+      </motion.div>
    );
 }
