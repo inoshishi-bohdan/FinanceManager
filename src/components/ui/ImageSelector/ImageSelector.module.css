@@ -32,13 +32,6 @@
    }
 }
 
-@media (max-width: 1150px) {
-   .image-option {
-      width: 80px;
-      height: 80px;
-   }
-}
-
 @media (max-width: 950px) {
    .image-option {
       width: 60px;
