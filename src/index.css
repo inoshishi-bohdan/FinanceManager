@@ -16,21 +16,21 @@ body {
 }
 
 main {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
    width: 100%;
    min-height: calc(100vh - var(--nav-height));
    padding-top: var(--nav-height);
    padding-left: 20px;
    padding-right: 20px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   flex-direction: column;
 }
 
 .page-content {
-   color: white;
-   text-align: center;
    margin-top: 60px;
+   text-align: center;
+   color: white;
 }
 
 .page-content h1 {
@@ -42,13 +42,13 @@ main {
 }
 
 .card-container {
-   max-width: 1900px;
-   margin-top: 40px;
    display: flex;
    justify-content: center;
    align-items: center;
    flex-wrap: wrap;
    gap: 10px;
+   max-width: 1900px;
+   margin-top: 40px;
 }
 
 .info-card {
@@ -82,28 +82,28 @@ h4.auth {
 }
 
 .form-control.auth {
-   color: rgba(0, 0, 0, 0.87);
-   border-bottom-color: rgba(0, 0, 0, 0.42);
    box-shadow: none !important;
    border: none;
    border-bottom: 1px solid;
    border-radius: 4px 4px 0 0;
+   border-bottom-color: rgba(0, 0, 0, 0.42);
+   color: rgba(0, 0, 0, 0.87);
 }
 
 .form-label.auth {
-   font-weight: 500 !important;
+   font-weight: 500;
 }
 
 .table-container {
-   margin-top: 60px;
-   max-width: 2400px;
    width: 90%;
+   max-width: 2400px;
+   margin-top: 60px;
 }
 
 .table-name {
-   color: white;
    font-size: 2.25rem;
    text-align: center;
+   color: white;
 }
 
 .table td {
@@ -115,9 +115,9 @@ h4.auth {
    width: 150px;
    max-width: 150px;
    min-width: 100px;
-   border-width: 1.5px;
    margin-right: 3px;
    margin-top: 3px;
+   border-width: 1.5px;
 }
 
 .add-button {
@@ -129,14 +129,14 @@ h4.auth {
 }
 
 .pagination-container {
-   margin-top: 15px;
-   width: 100%;
-   min-height: 40px;
    display: flex;
    justify-content: space-around;
    gap: 20px;
    align-items: center;
    flex-wrap: wrap;
+   margin-top: 15px;
+   width: 100%;
+   min-height: 40px;
 }
 
 .pagination-navigation {
@@ -147,27 +147,27 @@ h4.auth {
 }
 
 .page-selector {
-   max-width: 100px !important;
+   max-width: 100px;
 }
 
 .page-volume-select {
-   max-width: 250px !important;
+   max-width: 250px;
 }
 
 .statistic-title {
-   color: white;
+   margin: 60px 0 56px 0;
    font-size: 2.25rem;
    text-align: center;
-   margin: 60px 0 56px 0;
+   color: white;
 }
 
 .chart-container {
-   max-width: 2400px;
-   width: 90%;
    display: grid;
    gap: 20px;
    grid-template-columns: 1fr 1fr;
    grid-template-rows: 1fr 1fr 1fr;
+   max-width: 2400px;
+   width: 90%;
 }
 
 .chart {
@@ -182,14 +182,14 @@ h4.auth {
 }
 
 .chart-header {
-   min-height: 70px;
-   width: 100%;
-   padding: 20px;
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: space-between;
    gap: 10px;
+   min-height: 70px;
+   width: 100%;
+   padding: 20px;
    background-color: whitesmoke;
 }
 
@@ -198,11 +198,11 @@ h4.auth {
 }
 
 .chart-body {
-   height: 500px;
-   width: 100%;
    display: flex;
    justify-content: center;
    align-items: center;
+   height: 500px;
+   width: 100%;
    background-color: white;
 }
 
@@ -214,15 +214,6 @@ h4.auth {
 }
 
 @media (max-width: 1200px) {
-   .chart-container {
-      width: 100%;
-      grid-template-columns: 1fr;
-   }
-
-   .big-chart {
-      grid-column: 1;
-   }
-
    .info-card {
       width: 60%;
    }
@@ -230,9 +221,21 @@ h4.auth {
    .table-container {
       width: 100%;
    }
+
+   .chart-container {
+      grid-template-columns: 1fr;
+      width: 100%;
+   }
+
+   .big-chart {
+      grid-column: 1;
+   }
 }
 
 @media (max-width: 850px) {
+   .info-card {
+      width: 80%;
+   }
 
    .table th,
    td {
@@ -241,10 +244,6 @@ h4.auth {
 
    .chart-body {
       height: 400px;
-   }
-
-   .info-card {
-      width: 80%;
    }
 }
 
@@ -255,21 +254,21 @@ h4.auth {
       padding: 30px;
    }
 
-   .chart-header {
-      padding: 10px;
-   }
-
-   .chart-body {
-      height: 300px;
+   .main-profile-image {
+      height: 200px;
+      width: 200px;
    }
 
    .info-card {
       width: 100%;
    }
 
-   .main-profile-image {
-      height: 200px;
-      width: 200px;
+   .chart-header {
+      padding: 10px;
+   }
+
+   .chart-body {
+      height: 300px;
    }
 }
 
@@ -298,7 +297,7 @@ h4.auth {
    }
 
    .table {
-      font-size: 0.6rem !important;
+      font-size: 0.6rem;
    }
 
    .table th,
@@ -307,6 +306,6 @@ h4.auth {
    }
 
    .action-button {
-      width: 45px !important;
+      width: 45px;
    }
 }
