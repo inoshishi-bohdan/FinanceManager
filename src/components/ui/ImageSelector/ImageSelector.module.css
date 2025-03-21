@@ -1,31 +1,31 @@
 .image-selector {
-   margin: 20px 0;
    display: flex;
    align-items: center;
    justify-content: center;
    flex-wrap: wrap;
    gap: 15px;
+   margin: 20px 0;
 }
 
 .image-option {
+   transition: border-color 0.3s ease;
+   cursor: pointer;
    width: 100px;
    height: 100px;
    border-radius: 50%;
    object-fit: cover;
-   cursor: pointer; 
-   transition: border-color 0.3s ease; 
    border: 3px solid transparent;
- }
- 
- .image-option:hover:not(.selected) {
-   border-color: lightblue; 
- }
- 
- .image-option.selected {
-   border-color: lightgreen;
- }
+}
 
- @media (max-width: 1150px) {
+.image-option.selected {
+   border-color: lightgreen;
+}
+
+.image-option:hover:not(.selected) {
+   border-color: lightblue;
+}
+
+@media (max-width: 1150px) {
    .image-option {
       width: 80px;
       height: 80px;
