@@ -1,13 +1,13 @@
 .user-card {
-   max-width: 1000px;
-   width: 45%;
-   min-height: 400px !important;
-   margin-top: 60px;
-   padding: 20px;
    display: flex;
    align-items: center;
    justify-content: center;
-   gap: 15px
+   gap: 15px;
+   width: 45%;
+   max-width: 1000px;
+   min-height: 400px;
+   margin-top: 60px;
+   padding: 20px;
 }
 
 .profile-img {
