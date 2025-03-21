@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import PageContent from "../components/layout/PageContent";
+import PageContent from "../components/layout/PageContent/PageContent";
 import { AuthContext } from '../store/authentication-context';
 import incomePicture from '../assets/income.jpg'
 import expensePicture from '../assets/expense.jpg'
 import statisticPicture from '../assets/statistic.jpg'
-import InfoCard from "../components/ui/InfoCard";
+import InfoCard from "../components/ui/InfoCard/InfoCard";
 import useMyQuery from '../hooks/useMyQuery';
-import { BASE_URL, fetchMyProfileInfo, fetchProfileImage, fetchProfileImages } from '../util/http'
-import LoadingIndicator from '../components/ui/LoadingIndicator';
+import { BASE_URL, fetchMyProfileInfo, fetchProfileImage } from '../util/http'
+import LoadingIndicator from '../components/ui/LoadingIndicator/LoadingIndicator';
 import { motion } from "framer-motion";
 
 export default function HomePage() {

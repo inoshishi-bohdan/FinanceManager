@@ -1,4 +1,4 @@
-import MainNavigation from '../components/layout/MainNavigation.jsx'
+import MainNavigation from '../components/layout/MainNavigation/MainNavigation.jsx'
 import { Outlet } from 'react-router-dom'
 import { ToastContainer, Bounce } from 'react-toastify';
 import useMyMutation from "../hooks/useMyMutation.js";

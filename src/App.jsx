@@ -6,11 +6,11 @@ import RouterErrorPage from './pages/RouterError';
 import HomePage from './pages/Home';
 import NavigateErrorPage from './pages/NavigateError';
 import AuthenticationContextProvider from './store/authentication-context';
-import ProtectedRoute from './components/layout/ProtectedRoute';
+import ProtectedRoute from './components/layout/ProtectedRoute/ProtectedRoute';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './util/http';
 import { lazy, Suspense } from 'react';
-import LoadingIndicator from './components/ui/LoadingIndicator';
+import LoadingIndicator from './components/ui/LoadingIndicator/LoadingIndicator';
 
 const IncomePage = lazy(() => import('./pages/Incomes'));
 const ExpensePage = lazy(() => import('./pages/Expenses'));

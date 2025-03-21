@@ -1,5 +1,5 @@
-import IncomeTable from "../components/data-display/IncomeTable";
-import LoadingIndicator from "../components/ui/LoadingIndicator";
+import IncomeTable from "../components/data-display/IncomeTable/IncomeTable";
+import LoadingIndicator from "../components/ui/LoadingIndicator/LoadingIndicator";
 import useMyQuery from "../hooks/useMyQuery";
 import IncomeModalContextProvider from "../store/income-modal-context";
 import { fetchIncomes } from "../util/http";
